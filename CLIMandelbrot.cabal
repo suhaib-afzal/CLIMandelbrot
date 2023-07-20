@@ -1,0 +1,69 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           CLIMandelbrot
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/CLIMandelbrot#readme>
+homepage:       https://github.com/githubuser/CLIMandelbrot#readme
+bug-reports:    https://github.com/githubuser/CLIMandelbrot/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2023 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/CLIMandelbrot
+
+library
+  exposed-modules:
+      Lib
+      Parsing
+  other-modules:
+      Paths_CLIMandelbrot
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      ansi-terminal ==1.0
+    , base >=4.7 && <5
+    , colour ==2.3.6
+  default-language: Haskell2010
+
+executable CLIMandelbrot-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_CLIMandelbrot
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      CLIMandelbrot
+    , ansi-terminal ==1.0
+    , base >=4.7 && <5
+    , colour ==2.3.6
+  default-language: Haskell2010
+
+test-suite CLIMandelbrot-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_CLIMandelbrot
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -main-is Spec
+  build-depends:
+      CLIMandelbrot
+    , ansi-terminal ==1.0
+    , base >=4.7 && <5
+    , colour ==2.3.6
+    , hspec ==2.10.10
+  default-language: Haskell2010

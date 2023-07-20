@@ -1,0 +1,27 @@
+# CLI Mandelbrot Tool
+
+This project aims to provide a tool for plotting the mandelbrot set in the command line. 
+It is configurable, with the following parameters and defaults:
+
+Height and Width of plot:
+The provided Height (pH) and Width (pW) of the plot are Natural Numbers, excluding 0.
+Assuming default zoom, the subsection of the complex plane plotted is the square with x-values between (-2+0i,2+0i)
+and y-values between (0-2i,0+2i). We will call this the Standard Section. Each unit of the pH and pW values determines the number of cursor-sized pixels 
+used to plot the image. This is done by simply dividing the height and width of the Standard Section by the pH pW values provided. 
+The Complex value of each pixel is the centre value of where the pixel is on the Standard Section. Since the cursor is approximately twice as tall as it is wide,
+the plot only has the correct proportions when pW = 2*pH.
+	Default : pH = 16, pW = 32.
+	
+Palette: 
+Our palette are the colours that will be used to plot the set. The palette is defined by 1 Colour and a list of Colours. The one colour is the colour you
+want to print the values that are in the set. The list is the colours that you want used for values outside of the set, since values not part of the set are
+partioned by the speed at which they diverge under the function, each colour in the list will be used for a partion, with the list ordered by from fastest to diverge 
+to slowest.
+	Default: [rgb(255,179,179), rgb(255,102,102), rgb(255,25,25), rgb(204,0,0), rgb(153,0,0), rgb(122,0,0), rgb(92,0,0)], rgb(0,0,0)
+	These are shades of red from lighter to darker, so lighter colours are for faster divergence, then at the end we have black for inside the set.
+
+Zoom:
+The Zoom is a complex value by which we will multiply each value of the Standard Section to achieve our new subsection of the complex plane. This will zoom in by the magnitude 
+of the complex number and rotate by the Argument of the complex number. Hence the user can input this zoom value as Complex number in a tuple (magnitude, arguement) which is Polar form.
+	Default: (1,0)
+	

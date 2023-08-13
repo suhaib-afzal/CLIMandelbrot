@@ -9,6 +9,7 @@ import Data.Colour ( black , Colour )
 import Data.Colour.SRGB ( sRGB24 )
 import Data.Complex ( Complex ((:+)) )
 import Control.Monad ( replicateM_ )
+import Parsing
 import Text.Read ( readMaybe )
 import System.Environment
 import Lib -- ( Frame
@@ -60,39 +61,18 @@ parsePlotArgs [m',n',p',z',c'] = do
   Right (m,n,p,z,c)
 parsePlotArgs _ = Left "Please pass exactly 4 arguments to the command, you may need to wrap individual arguments in \"\" " 
 
-parseNatural :: String -> Either String Nat
-parseNatural s = do
-  int <- ourReadEither s
-  nat <- toNat int
-  Right nat
-
 ourReadEither :: String -> Either String Int
 ourReadEither s = case readMaybe s of
   Nothing  -> Left "Cannot parse a passed in value as a Number"
   Just int -> Right int
 
-parsePalette :: String -> Either String Palette
-parsePalette str = undefined-- do
-  -- blocks <- splitIntoBlocks str
-  -- if length blocks /= 2 then Left "We cannot parse the Palette input into exactly two parts, please try again"
-
-parseZoom :: String -> Either String Zoom
-parseZoom = undefined
-
--- data ComputationInfo =
---  ComputationInfo { func :: Complex Double -> Complex Double -> Complex Double
---                  , orbitRad :: Double
---                  , initVal :: Complex Double
---                  , maxIterations :: Int }
-
   
-
-splitIntoBlocks :: String -> Either String [String]
-splitIntoBlocks = undefined
+-- splitIntoBlocks :: String -> Either String [String]
+-- splitIntoBlocks = undefined
 
 
 helpText :: [String]
-helpText = ["help yoselfkk brudda"]
+helpText = ["help yoself brudda"]
 
 -- OUTPUT
 displayText :: [String] -> IO ()

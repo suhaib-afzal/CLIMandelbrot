@@ -32,6 +32,8 @@ data Nat = Nil | Succ Nat
 data SNat :: Nat -> Type where
   SNil  :: SNat Nil
   SSucc :: SNat n -> SNat (Succ n)
+
+type Cmplx = Complex Double
   
 zero  = SNil
 one   = SSucc zero
@@ -100,20 +102,21 @@ csp2 (Succ m) (Succ n) k = csp2 m   n   (flip (flip (k . SSucc) . SSucc))
 data ComputationResult = Diverges Double | NotDiverge
 
 data ComputationInfo =
- ComputationInfo { func :: Complex Double -> Complex Double -> Complex Double
+ ComputationInfo { func :: Cmplx -> Cmplx -> Cmplx
                  , orbitRad :: Double
-                 , initVal :: Complex Double
+                 , initVal :: Cmplx
                  , maxIterations :: Int }
 
 type Frame m n = Matrix m n (Colour Float)
-type CoordGrid m n = Matrix m n (Complex Double)
+type CoordGrid m n = Matrix m n (Cmplx)
 
 data SomeFrame = SomeFrame (forall m n. Frame m n)
 
-data Palette = Palette [Colour Float] (Colour Float)
+data Palette = Palette [Colour Float] (Colour Float) deriving Show
 data Zoom =
-   Zoom { origin :: Complex Double
-        , factor :: Complex Double }
+   Zoom { origin :: Cmplx
+        , factor :: Cmplx }
+   deriving Show
 
 --MATRIX :: Height -> Width -> Type -> Type
 data Matrix :: Nat -> Nat -> Type -> Type where
@@ -371,7 +374,7 @@ getIncrement n len = len/(fromIntegral . fromEnum $ n)
 applyZoom :: Zoom -> CoordGrid m n -> CoordGrid m n
 applyZoom zoom = fmap ((*) (factor zoom) . (+) (origin zoom))
 
-doComputation :: ComputationInfo -> Complex Double -> ComputationResult
+doComputation :: ComputationInfo -> Cmplx -> ComputationResult
 doComputation info coord =
   let iterationResult = takeWhile (\x -> magnitude x < orbitRad info )
                         . take (maxIterations info)
@@ -386,6 +389,6 @@ pickColour (Palette _   sing) NotDiverge        = sing
 pickColour (Palette lis _   ) (Diverges percen) = lis !! index
   where index = round $ percen * fromIntegral (length lis - 1)
 
-mandelbrotFunc :: Complex Double -> Complex Double ->
-                  Complex Double
+mandelbrotFunc :: Cmplx -> Cmplx ->
+                  Cmplx
 mandelbrotFunc c z = z*z + c

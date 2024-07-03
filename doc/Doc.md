@@ -1,7 +1,18 @@
 # CLI Mandelbrot Tool
 
-This project aims to provide a tool for plotting the mandelbrot set in the command line. 
-It is configurable, with the following parameters and defaults:
+This project aims to provide a tool for plotting the fractal sets in the command line. 
+One can pass parameters to the tool as described below:
+
+
+Full command:
+Here are some examples of complete and correct commands to the tool.
+	mandelbrot 10 20
+    plot 90 180 "(204 230 255, 153 204 255, 102 179 255, 51 153 255, 0 128 255, 0 102 204, 0 77 153), 0 0 0" "0,1" "z*z*z +c, 2,0, 1000"
+	
+The first will give a mandelbrot print with 10 cursors of height and 20 of width. This should produce a well proportioned image, see section "Height and Width of plot" for more 
+information.
+The second will print according to the specified inputs, the order being: the Height, the Width, the Palette (the set of colours by which the plot is drawn), the Zoom (the value by which the image is zoomed in) and the ComputationInfo (the information by which the computation of the plot is specified). See the specific sections on each parameter for more information.
+
 
 Height and Width of plot:
 The provided Height (pH) and Width (pW) of the plot are Natural Numbers, excluding 0.
@@ -12,7 +23,8 @@ The Complex value of each pixel is the centre value of where the pixel is on the
 the plot only has the correct proportions when pW = 2*pH.
 	Default : 16 32.
 	These are pH and pW in that order.
-	
+
+
 Palette: 
 Our palette are the colours that will be used to plot the set. The palette is defined by 1 Colour and a list of Colours. The one colour is the colour you
 want to print the values that are in the set. The list is the colours that you want used for values outside of the set, since values not part of the set are
@@ -30,8 +42,7 @@ of the complex number and rotate by the Argument of the complex number.
     Input format: Make sure to seperate the two values with a comma
 		          Please ensure you use + in the centre and i on the second value for the complex numbers. If you want to use negative values please wrap it in brackets.
 	
-
 ComputationInfo:
-This is information specifying the nature of the computation to perform. The components of this are: func, orbitRad (positive double), initVal (complex number), maxIterations (positive integer). The func is the complex function to evaluate to form the fractal, how exactly this occurs is based on the grid that it is being applied to and the orbitRad, initVal, maxIterations values. The func takes two values z and c. c is a constant that takes the value of the grid coordinate. For the initial iteration z takes the value provided in initVal. After func has been applied the return complex number is passed to the next iteration as the z value. This continues for maxIterations times. If the magnitude of the value returned from any of these iterations ever is strictly greater than orbitRad then we take the a value from the Palette list propotional to number of iterations taken, otherwise we assign it the "inside-set" colour.
+This is information specifying the nature of the computation to perform. The components of this are: func, orbitRad (positive double), initVal (complex number), maxIterations (positive integer). The func is the complex function to evaluate to form the fractal, how exactly this occurs is based on the grid that it is being applied to and the orbitRad, initVal, maxIterations values. The func takes two values z and c. c is a constant that takes the value of the grid coordinate. For the initial iteration z takes the value provided in initVal. After func h1as been applied the return complex number is passed to the next iteration as the z value. This continues for maxIterations times. If the magnitude of the value returned from any of these iterations ever is strictly greater than orbitRad then we take the a value from the Palette list propotional to number of iterations taken, otherwise we assign it the "inside-set" colour.
 	Default: z*z + c, 2, 0+0i, 1000
 	Input format: Please seperate each value with a comma. In the function valid operations include + - * ^ /. In the function please do not use any charecters barring z c and i. For decimal point seperator use '.'

@@ -56,6 +56,8 @@ test-suite CLIMandelbrot-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      LibSpec
+      ParsingSpec
       Paths_CLIMandelbrot
   hs-source-dirs:
       test

@@ -53,7 +53,7 @@ data ComputationResult = Diverges Double | NotDiverge
 mandelbrotFrame ::  SNat m -> SNat n ->                    
                     Either String (Frame m n)
 mandelbrotFrame m n =
-  let info = ComputationInfo mandelbrotFunc 2 0 1000
+  let info = ComputationInfo mandelbrotFunc 2 0 55
       zoom = Zoom (0 :+ 0) (1 :+ 0)
   in plot m n info defaultPalette zoom
 

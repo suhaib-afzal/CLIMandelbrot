@@ -6,6 +6,7 @@
 
     CLIMandelbrot-exe.exe mandelbrot 800 1600
 
+To recreate this you must zoom out your command window before executing the command.
 
 ## Shining Snowflake
 

@@ -1,12 +1,11 @@
 # CLIMandelbrot
 
 ## Very Large Mandelbrot 
+To recreate this you must zoom out your command window before executing the command.
 
 ![image](https://github.com/suhaib-afzal/CLIMandelbrot/assets/67964638/2a75636d-f24a-4a3f-a09d-ce10623a4855)
 
     CLIMandelbrot-exe.exe mandelbrot 800 1600
-
-To recreate this you must zoom out your command window before executing the command.
 
 ## Shining Snowflake
 
@@ -21,6 +20,7 @@ To recreate this you must zoom out your command window before executing the comm
     CLIMandelbrot-exe.exe plot 90 180 "(0 0 0, 0 200 0, 0 155 0, 0 100 0, 0 50 0), 143 255 143" "0,1" "z^10 + z^4 + c, 2,0, 1000"
 
 ## Another Big One
+To recreate this you must zoom out your command window before executing the command.
 
 ![image](https://github.com/suhaib-afzal/CLIMandelbrot/assets/67964638/4ffd8d70-c660-4670-8d9d-ba3a51e55085)
 

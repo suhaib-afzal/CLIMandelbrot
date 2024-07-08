@@ -1,8 +1,8 @@
-module Parsing where
-               -- ( parseNatural
-               -- , parsePalette
-               -- , parseZoom
-               -- , parseCompInfo ) where
+module Parsing ( parseNatural
+               , parsePalette
+               , parseZoom
+               , parseCompInfo )
+                where
 
 -- Expr ::= Expr - Expr | Add
 -- Add  ::= Add  + Add  | Mul
@@ -21,6 +21,9 @@ import Data.Colour
 import Data.Tuple
 import Data.Colour.SRGB ( sRGB24 )
 import Lib
+import Datatypes ( toNat
+                 , Cmplx
+                 , Nat(Nil, Succ) )
 
 data ParseTree  = LeafP String | NodeP ParseTree String ParseTree deriving Show
 data ExecTree a = LeafE a      | NodeE (ExecTree a) (a -> a -> a) (ExecTree a)

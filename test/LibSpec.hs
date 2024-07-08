@@ -1,7 +1,19 @@
 module LibSpec ( spec ) where
 
 import Test.Hspec
-import Lib
+import Lib ( ComputationInfo(ComputationInfo)
+           , Palette(Palette)
+           , Zoom(Zoom)
+           , plot )
+import Datatypes ( zero
+                 , one
+                 , two
+                 , four
+                 , eight
+                 , Vector (VNil, (:*))
+                 , Matrix (MNil, (:^))
+                 , singleton )
+
 import Data.Complex ( Complex( (:+) ) )
 import Data.Colour ( black , Colour )
 import Data.Colour.SRGB ( sRGB24 )

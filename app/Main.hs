@@ -12,30 +12,38 @@ import Control.Monad ( replicateM_ )
 import Parsing
 import Text.Read ( readMaybe )
 import System.Environment
-import Lib -- ( Frame
-import Parsing ( parseCompInfo )
-           -- , mandelbrotFrame
-           -- , singleColourFrame
-           -- , traverseMat_
-           -- , plotAndDisplay)
+import Lib ( Palette(Palette)
+           , Zoom(Zoom)
+           , ComputationInfo(ComputationInfo)
+           , Frame
+           , plot
+           , mandelbrotFrame 
+           , csp )
+import Datatypes ( Nat(Nil, Succ)
+                 , traverseMat_ )
+import Parsing ( parseNatural
+               , parsePalette
+               , parseZoom
+               , parseCompInfo )
+
 
 
 -- MAIN
 main :: IO ()
 main = do
-  let defaultCompInfo = ComputationInfo const (1 :: Double) (0 :+ 0) 10
+  --let defaultCompInfo = ComputationInfo const (1 :: Double) (0 :+ 0) 10
   args <- getArgs
   case args of
     [] -> displayError "No arguments were passed to the function"
     ("help":_) -> displayText helpText
     ("mandelbrot":rest) -> case parseMandelbrotArgs rest of
       Left str -> displayError str
-      Right (height,width) -> csp2 height width (\x y -> case mandelbrotFrame x y of
+      Right (height,width) -> csp height width (\x y -> case mandelbrotFrame x y of
                                                     Left str -> displayError str
                                                     Right frame -> displayFrame frame)
     ("plot":rest) -> case parsePlotArgs rest of
       Left str -> displayError str
-      Right (height,width,palette,zoom,compInfo) -> csp2 height width (\x y -> case plot x y compInfo palette zoom of
+      Right (height,width,palette,zoom,compInfo) -> csp height width (\x y -> case plot x y compInfo palette zoom of
                                                                  Left str -> displayError str
                                                                  Right frame -> displayFrame frame)
     _ -> displayError "Command supplied is not recognised, please start your set of arguments with a defined command"
@@ -65,10 +73,6 @@ ourReadEither :: String -> Either String Int
 ourReadEither s = case readMaybe s of
   Nothing  -> Left "Cannot parse a passed in value as a Number"
   Just int -> Right int
-
-  
--- splitIntoBlocks :: String -> Either String [String]
--- splitIntoBlocks = undefined
 
 
 helpText :: [String]

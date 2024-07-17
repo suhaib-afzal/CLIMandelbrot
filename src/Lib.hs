@@ -36,7 +36,7 @@ data ComputationInfo =
                  , initVal :: Cmplx
                  , maxIterations :: Int }
 
-data Palette = Palette [Colour Float] (Colour Float) deriving Show
+data Palette = Palette [Colour Float] (Colour Float) deriving (Show, Eq)
 data Zoom =
    Zoom { origin :: Cmplx
         , factor :: Cmplx }
@@ -75,9 +75,9 @@ plot m n info palette zoom = do
              Palette ->
              Zoom ->
              Frame m n
-  innerPlot m n info palette zoom = fmap (pickColour palette . doComputation info)
-                                    . applyZoom zoom
-                                    $ standardGrid m n
+  innerPlot mI nI infoI paletteI zoomI = fmap (pickColour paletteI . doComputation infoI)
+                                         . applyZoom zoomI
+                                         $ standardGrid mI nI
 
 
 defaultPalette :: Palette

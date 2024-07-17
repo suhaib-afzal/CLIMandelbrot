@@ -1,8 +1,0 @@
-Works Well!
-mandelbrot 80 160
-
-Long Nose
-mandelbrot 81 162
-
-Weird gaps
-> mandelbrot 81 162

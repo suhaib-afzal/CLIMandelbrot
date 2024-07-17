@@ -46,6 +46,8 @@ parsePalette str
   | null str                                      = Left "Palette input is empty"
   | all (== 0) bracketing                         = Left "Please ensure you bracket the palette list"
   | last bracketing /= 0 || any (< 0) bracketing  = Left "Please ensure your bracketing is balanced"
+  | last bracketing == 0 
+    && ((last . init $ bracketing) > 0)           = Left "Please ensure you include values for the list and single rgb"
   | sing listStrC || null valStr                  = Left "Please ensure you include values for the list and single rgb"
   | listStr == "()"                               = Left "Empty brackets passed in for list"
   | any null innerSplit                           = Left "Please ensure there are no empty terms in the Palette List"
@@ -208,6 +210,14 @@ literal str
       | x == '.'    = numLiteral (n-1) xs
       | isDigit x   = numLiteral n xs
       | otherwise   = False
+
+isBracketingBalanced :: String -> Bool
+isBracketingBalanced str = let bracketing = bracketDepth str 
+                           in last bracketing /= 0 || any (< 0) bracketing
+
+
+isThereBracketing :: String -> Bool
+isThereBracketing str = all (== 0) (bracketDepth str)
 
 bracketDepth :: String -> [Int]
 bracketDepth = bracDepthHelp 0
